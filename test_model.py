@@ -29,16 +29,17 @@ def main():
     runs = ['01', '02', '03']
     sides = ['left','right']
     subjects = ['S01','S02','S03','S04','S05','S06','S07','S08','S09','S10']
-    # 'MobileNet_MLP'  'ResNet_LSTM' 'SFTIK'
-    version = 'ViT_PatchTST'
-    result_path = f"E:/Final_Project/公开代码/logs/{version}"
+    # 'MobileNet_MLP'  'ResNet_LSTM' 'SFTIK' 'ViT_PatchTST'
+    version = 'SFTIK'
+    base_path = '/home/usr/SFTIK' # Change to your own path
+    result_path = f"{base_path}/logs/{version}"
 
     for fold in folds:
         print(f'Start Testing On Subject {fold["test"]}',flush=True)
         test_subjects = fold['test']
         val_subjects = fold['validate']
 
-        model_filename = os.path.join(f'E:\Final_Project\SFTIK\weights\{version}\{version}' + '_val_' + ''.join(val_subjects) + '_test_' +  ''.join(test_subjects) + ".pth")
+        model_filename = os.path.join(f'{base_path}/weights/{version}/{version}' + '_val_' + ''.join(val_subjects) + '_test_' +  ''.join(test_subjects) + ".pth")
 
         #model = SFTIK(c_in = 19, context_window = 100, target_window = 100, patch_len = 10, stride = 10, embed_dim = 768, n_heads = 12, pre_depth = 6, late_depth = 6 )
         #model = LSTMTimeSeries(nvars = 19, hidden_size = 256, num_layers = 3)
@@ -47,7 +48,7 @@ def main():
 
         model.load_state_dict(torch.load(model_filename))
         
-        _, _, test_loader = create_meta_dataloader(subjects=subjects, runs=runs, sides=sides, modality='Depth', dataset_path='E:\Final_Project\dataset',
+        _, _, test_loader = create_meta_dataloader(subjects=subjects, runs=runs, sides=sides, modality='Depth', dataset_path=f'{base_path}/dataset',
                                                                 test_subjects=test_subjects, val_subjects=val_subjects, train_batch_size = 32, val_batch_size = 32)
 
 
