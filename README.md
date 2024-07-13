@@ -1,5 +1,5 @@
 # SFTIK
-This is the code for our paper "Terrain-Aware Stride-Level Trajectory Forecasting for a Powered Hip Exoskeleton via Vision and Kinematics Fusion"
+This is the code for our paper "”Terrain-Aware Stride-Level Angle Forecasting of Human Hip Joint via Vision and Kinematics Fusion" (IEEE Robtics and Automation Letters 2024)
 
 All data could be found at https://huggingface.co/datasets/Ruoqi2000/TIHK.
 
